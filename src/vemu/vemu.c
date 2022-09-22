@@ -69,7 +69,7 @@ int main(int argc, char **argv) {
 		return 1;
 	}
 	if(vemu_is_dir(VGA_FILE)) {
-		printf("vemu: %s: Is a directory", VGA_FILE);
+		fprintf(stderr, "vemu: %s: Is a directory\n", VGA_FILE);
 		fclose(fp);
 		return 2;
 	}
