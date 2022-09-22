@@ -14,11 +14,11 @@ case $PLATFORM in
 		EXE_SUFFIX=
 		MACHINE=$PLATFORM
 		;;
-    Darwin*)
+	Darwin*)
 		EXE_SUFFIX=.app
 		MACHINE=Darwin
 		;;
-    CYGWIN*)
+	CYGWIN*)
 		EXE_SUFFIX=.exe
 		MACHINE="Windows/Cygwin"
 		;;
@@ -30,7 +30,7 @@ case $PLATFORM in
 		EXE_SUFFIX=.exe
 		MACHINE="Windows/Msys2"
 		;;
-    *)
+	*)
 		printf "unknown platform: %s\n" $PLATFORM
 		exit 1
 		;;
