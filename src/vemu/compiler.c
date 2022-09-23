@@ -40,7 +40,6 @@ char *make_cs_color(char *txt, vga_entry_t entry) {
 		case 0x0E: strcat(txt, " Console.ForegroundColor = ConsoleColor.Yellow;"); break;
 		case 0x0F: strcat(txt, " Console.ForegroundColor = ConsoleColor.White;"); break;
 	}
-	//sprintf(txt, "\033[%d;%dm%c\033[0m", bg, fg, (entry.ch == 0 ? ' ' : entry.ch));
 	return txt;
 }
 
@@ -51,24 +50,24 @@ void compile(FILE *in, FILE *out) {
 "class Program {\n"
 "\tstatic void Main(string[] args) {\n");
 	char txt[128];
-	vga_entry_t entry;
-	//vga_entry_t entry2;
+	vga_entry_t entry1;
+	vga_entry_t entry2;
 	for(size_t y=0; y < VGA_HEIGHT; y++) {
 		for(size_t x=0; x < VGA_WIDTH; x++) {
 			/*
 			 * (&txt) = warning: passing argument 1 of 'make_char' from incompatible pointer type
 			 * (&txt[0]) = no compiler warning
 			 */
-			entry = vga_read_entry(
+			entry2 = vga_read_entry(
 				tty_buf[vga_get_index(x, y)]
 			);
-			int ch = (entry.ch < 32 ? ' ' : entry.ch);
-			//if((entry1.bg != entry2.bg) && (entry1.fg != entry2.fg)) {
-			fprintf(out, "\t\t%s Console.Write((char)%d);\n", make_cs_color((&txt[0]), entry), ch);
-			//} else {
-				//fprintf(out, "\t\tConsole.Write((char)%d);\n", ch);
-			//}
-			//entry1 = entry2;
+			int ch = (entry2.ch < 32 ? ' ' : entry2.ch);
+			if((entry1.bg != entry2.bg) || (entry1.fg != entry2.fg)) {
+				fprintf(out, "\t\t%s Console.Write((char)%d);\n", make_cs_color((&txt[0]), entry2), ch);
+			} else {
+				fprintf(out, "\t\tConsole.Write((char)%d);\n", ch);
+			}
+			entry1 = entry2;
 		}
 		fprintf(out, "\t\tConsole.WriteLine();\n");
 	}
