@@ -58,13 +58,13 @@ char *make_char(char *txt, vga_entry_t entry) {
 }
 
 #define VGA_FILE ((argc <= 1 ? "vga.bin" : argv[1]))
-
 int main(int argc, char **argv) {
 	tty_set_default_color();
 	tty_clear();
 	FILE *fp;
 	fp = fopen(VGA_FILE, "r");
 	if(fp == NULL) {
+		fprintf(stderr, "vemu: ");
 		perror(VGA_FILE);
 		return 1;
 	}
@@ -92,6 +92,8 @@ int main(int argc, char **argv) {
 	 *	0F 48 0F 65 0F 6C 0F 6C 0F 6F 0F 2C 0F 20 0F 77 0F 6F 0F 72 0F 6C 0F 64 0F 21
 	 *
 	 */
+	// execute
+#if VEMU_MODE == 0
 	puts("+--------------------------------------------------------------------------------+");
 	char txt[32];
 	for(size_t y=0; y < VGA_HEIGHT; y++) {
@@ -110,5 +112,21 @@ int main(int argc, char **argv) {
 		puts("\033[0m|");
 	}
 	puts("+--------------------------------------------------------------------------------+");
+	// compile
+	#elif VEMU_MODE == 1
+	if(vemu_is_dir("vga.cs") == 0) {
+		fprintf(stderr, "vemu: vga.cs: Is a directory\n");
+		return 2;
+	}
+	FILE *out;
+	out = fopen("vga.cs", "w");
+	if(out == NULL) {
+		fprintf(stderr, "vemu: ");
+		perror("vga.cs");
+		return 1;
+	}
+	compile(fp, out);
+	fclose(out);
+	#endif
 	return 0;
 }
