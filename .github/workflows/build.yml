@@ -13,6 +13,7 @@ jobs:
         - uses: actions/checkout@v3
         - name: build
           run: ./build.sh
+        - name: deploy
           with:
           name: Binary executables
           path: bin/**
@@ -22,6 +23,7 @@ windows-build:
         - uses: actions/checkout@v3
         - name: build
           run: bash ./build.sh
+        - name: deploy
           with:
           name: Binary executables
           path: bin/**
