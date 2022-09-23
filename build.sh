@@ -9,6 +9,7 @@ case $PLATFORM in
 	Linux)
 		EXE_SUFFIX=
 		MACHINE=Linux
+		PLATFORM=linux
 		;;
 	FreeBSD|NetBSD|OpenBSD)
 		EXE_SUFFIX=
@@ -18,6 +19,7 @@ case $PLATFORM in
 			NetBSD) PLATFORM=netbsd;;
 			OpenBSD) PLATFORM=openbsd;;
 		esac
+		;;
 	Darwin*)
 		EXE_SUFFIX=.app
 		MACHINE=Darwin
