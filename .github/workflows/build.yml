@@ -12,7 +12,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Build
-              run: ./build.sh
+              run: chmod +x build.sh && bash ./build.sh
             - name: Deploy
               uses: actions/checkout@v3
               with:
@@ -23,7 +23,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Build
-              run: bash ./build.sh
+              run: chmod +x build.sh && bash ./build.sh
             - name: Deploy
               uses: actions/checkout@v3
               with:
