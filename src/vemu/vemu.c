@@ -1,12 +1,15 @@
 #include "vemu/vemu.h"
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
 
-#include "vemu/vga.h"
+#include "vemu/compiler.h"
 #include "vemu/tty.h"
+#include "vemu/vga.h"
 
 int vemu_is_dir(const char *path) {
 	struct stat s;
@@ -58,6 +61,7 @@ char *make_char(char *txt, vga_entry_t entry) {
 }
 
 #define VGA_FILE ((argc <= 1 ? "vga.bin" : argv[1]))
+
 int main(int argc, char **argv) {
 	tty_set_default_color();
 	tty_clear();
@@ -114,15 +118,26 @@ int main(int argc, char **argv) {
 	puts("+--------------------------------------------------------------------------------+");
 	// compile
 	#elif VEMU_MODE == 1
-	if(vemu_is_dir("vga.cs") == 0) {
-		fprintf(stderr, "vemu: vga.cs: Is a directory\n");
+	int bytes = (sizeof(char) * (strlen(VGA_FILE) + 4));
+	char *filename = malloc(bytes);
+	if(filename == NULL) {
+		fprintf(stderr, "vemu: memory: Failed to allocate %d bytes!", bytes);
+		return 3;
+	}
+	strcpy(filename, (VGA_FILE));
+	strcat(filename, ".cs");
+	FILE *out;
+	out = fopen(filename, "a");
+	if(vemu_is_dir(filename) == 0) {
+		fprintf(stderr, "vemu: %s: Is a directory\n", filename);
+		fclose(out);
+		free(filename);
 		return 2;
 	}
-	FILE *out;
-	out = fopen("vga.cs", "w");
 	if(out == NULL) {
 		fprintf(stderr, "vemu: ");
-		perror("vga.cs");
+		perror(filename);
+		free(filename);
 		return 1;
 	}
 	compile(fp, out);
