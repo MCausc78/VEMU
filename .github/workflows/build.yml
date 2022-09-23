@@ -10,20 +10,22 @@ jobs:
     ubuntu-build:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v3
-        - name: build
-          run: ./build.sh
-        - name: deploy
-          with:
-          name: Binary executables
-          path: bin/**
+            - uses: actions/checkout@v2
+            - name: Build
+              run: ./build.sh
+            - uses: actions/checkout@v3
+            - name: Deploy
+              with:
+              name: Executables
+              path: bin/**
 windows-build:
         runs-on: windows-latest
         steps:
-        - uses: actions/checkout@v3
-        - name: build
-          run: bash ./build.sh
-        - name: deploy
-          with:
-          name: Binary executables
-          path: bin/**
+            - uses: actions/checkout@v2
+            - name: Build
+              run: bash ./build.sh
+            - uses: actions/checkout@v3
+            - name: Deploy
+              with:
+              name: Executables
+              path: bin/**
