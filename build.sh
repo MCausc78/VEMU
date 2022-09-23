@@ -33,7 +33,7 @@ case $PLATFORM in
 	MINGW*)
 		EXE_SUFFIX=.exe
 		MACHINE="Windows/MinGW"
-		PLATFORM=cygwin
+		PLATFORM=mingw
 		;;
 	MSYS*)
 		EXE_SUFFIX=.exe
