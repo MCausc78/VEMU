@@ -16,7 +16,7 @@ jobs:
             - name: Deploy
               uses: actions/checkout@v3
               with:
-                name: Executables
+                name: Linux Executables
                 path: bin/**
     windows-build:
         runs-on: windows-latest
@@ -27,5 +27,5 @@ jobs:
             - name: Deploy
               uses: actions/checkout@v3
               with:
-                name: Executables
+                name: Windows Executables
                 path: bin\*
