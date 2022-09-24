@@ -1,4 +1,4 @@
-name: C CI
+name: Build
 
 on:
     push:
@@ -10,7 +10,7 @@ jobs:
     ubuntu-build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v2
             - name: Build
               run: chmod +x build.sh && bash ./build.sh
             - name: Deploy
@@ -20,7 +20,7 @@ jobs:
     windows-build:
         runs-on: windows-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v2
             - name: Build
               run: chmod +x build.sh && bash ./build.sh
             - name: Deploy
