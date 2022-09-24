@@ -14,7 +14,7 @@ jobs:
             - name: Build
               run: chmod +x build.sh && bash ./build.sh
             - name: Deploy
-            - uses: actions/checkout@v3
+              uses: actions/upload-artifact@v3
               with:
                 name: Linux Executables
                 path: bin/**
@@ -25,7 +25,7 @@ jobs:
             - name: Build
               run: chmod +x build.sh && bash ./build.sh
             - name: Deploy
-            - uses: actions/checkout@v3
+              uses: actions/upload-artifact@v3
               with:
                 name: Windows Executables
-                path: bin
+                path: bin\**
