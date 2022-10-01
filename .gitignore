@@ -1,4 +1,5 @@
 bin/
 bin/*
 
+examples/*.cs
 examples/**.cs
