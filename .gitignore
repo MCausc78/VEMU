@@ -3,3 +3,8 @@ bin/*
 
 examples/*.cs
 examples/**.cs
+
+bindings/python-bindings/pyvemu/__pycache__/
+bindings/python-bindings/pyvemu/**/__pycache__/
+bindings/python-bindings/dist/
+bindings/python-bindings/*.egg-info/
