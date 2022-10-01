@@ -11,8 +11,8 @@ class VGADisplay:
         return self
     def get_buffer(self) -> list:
         return self._buffer
-    def get_row(self) -> int:
-        return self._row
+    def get_color(self) -> int:
+        return self._color
     def get_column(self) -> int:
         return self._column
     def get_row(self) -> int:
@@ -39,7 +39,9 @@ class VGADisplay:
         raise NotImplementedError()
         return self
     def put_char_at(self, character: str, color: int, x: int, y: int):
-        assert (((len(str) == 1) and (color >= 0x00 and color <= 0xFF)) and ((x >= 0 and x < vga.VGA_WIDTH) and (y >= 0 and x < vga.VGA_HEIGHT)))
+        if not (len(character) == 1):
+            raise ValueError("expected single character, got '%s'" % character)
+        assert ((color >= 0x00 and color <= 0xFF) and ((x >= 0 and x < vga.VGA_WIDTH) and (y >= 0 and x < vga.VGA_HEIGHT)))
         if character == '\a' or character == '\b' or character == '\f' or character == '\n' or character == '\r':
             return self
         self._buffer[ vga.get_index(x, y) ] = vga.entry(
@@ -48,7 +50,8 @@ class VGADisplay:
         return self
     def put_char(self, character: str):
         if not (len(character) == 1):
-            raise ValueError("expected single character, got %s" % character)
+            raise ValueError("expected single character, got '%s'" % character)
+        self.put_char_at(character, self._color, this._column, this._row)
         self._column += 1
         if self._column == vga.VGA_WIDTH:
             self.set_column(0)
@@ -80,3 +83,6 @@ class VGADisplay:
         self.put_char(character)
         self.set_color(oldColor)
         return self
+    def print(self, string: str):
+        for c in string:
+            self.put_char(c)
