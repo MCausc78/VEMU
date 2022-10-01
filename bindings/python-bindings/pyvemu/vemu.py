@@ -1,4 +1,4 @@
-from pyvemu.display import display, vga
+from pyvemu import display, vga
 
 class VEMU:
     def __init__(self):
