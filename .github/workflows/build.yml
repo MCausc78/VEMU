@@ -18,6 +18,13 @@ jobs:
               with:
                 name: Linux Executables
                 path: bin/**
+            - name: Build Python bindings
+              run: chmod +x build-python-bindings.sh && bash ./build-python-bindings.sh
+            - name: Upload Python bindings
+              uses: actions/upload-artifact@v3
+              with:
+                name: Python Bindings
+                path: bindings/python-bindings/dist/**
     windows-build:
         runs-on: windows-latest
         steps:
