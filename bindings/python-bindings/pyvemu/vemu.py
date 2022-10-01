@@ -5,7 +5,7 @@ class VEMU:
         self._display = display.VGADisplay()
     def get_display(self) -> display.VGADisplay:
         return self._display
-    def set_display(self, newDisplay: VGADisplay):
+    def set_display(self, newDisplay: display.VGADisplay):
         self._display = newDisplay
         return self
     def save(self, to: str):
