@@ -30,7 +30,7 @@ def entry_color(fg: int, bg: int) -> int:
 
 class VGAEntry:
     def __init__(self, character: str = '\0', color: int = 0):
-        assert ((len(ch) == 0) and (color >= 0 and color <= 0xFF))
+        assert ((len(character) == 1) and (color >= 0 and color <= 0xFF))
         self.character = ord(character)
         self.color = color
     def get_background(self) -> int:

@@ -1,6 +1,6 @@
 [project]
 name = "pyvemu_MCausc78"
-version = "1.0.7"
+version = "1.0.8"
 authors = [
   { name="MCausc78", email="mcausc78@gmail.com" },
 ]
