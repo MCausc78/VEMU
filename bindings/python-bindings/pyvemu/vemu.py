@@ -15,5 +15,5 @@ class VEMU:
                 for x in range(vga.VGA_WIDTH - 1):
                     e = vga.read_entry( buf[ vga.get_index(x, y) ] )
                     f.write((f'{chr(e.color)}{chr(e.character)}').encode())
-                f.write(b'\0\0')
+                # f.write(b'\0\0')
         return self
