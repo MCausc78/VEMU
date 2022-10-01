@@ -4,8 +4,9 @@ class VGADisplay:
     def __init__(self):
         self._column = 0
         self._row = 0
-        self._color = 0x00
+        self.reset_color()
         self._buffer = [0] * 2080
+        self.clear()
     def reset_color(self):
         self.set_color(vga.entry_color(vga.VGA_COLOR_WHITE, vga.VGA_COLOR_BLACK))
         return self
@@ -31,7 +32,7 @@ class VGADisplay:
         return self
     def clear(self):
         self.set_row(0)
-        self.set_col(0)
+        self.set_column(0)
         entry = vga.entry(' ', self.get_color())
         self._buffer = [entry] * 2080
         return self
@@ -51,7 +52,7 @@ class VGADisplay:
     def put_char(self, character: str):
         if not (len(character) == 1):
             raise ValueError("expected single character, got '%s'" % character)
-        self.put_char_at(character, self._color, this._column, this._row)
+        self.put_char_at(character, self._color, self._column, self._row)
         self._column += 1
         if self._column == vga.VGA_WIDTH:
             self.set_column(0)
