@@ -42,7 +42,7 @@ class VGADisplay:
     def put_char_at(self, character: str, color: int, x: int, y: int):
         if not (len(character) == 1):
             raise ValueError("expected single character, got '%s'" % character)
-        assert ((color >= 0x00 and color <= 0xFF) and ((x >= 0 and x < vga.VGA_WIDTH) and (y >= 0 and x < vga.VGA_HEIGHT)))
+        assert ((color >= 0x00 and color <= 0xFF) and ((x >= 0 and x < vga.VGA_WIDTH) and (y >= 0 and y < vga.VGA_HEIGHT)))
         if character == '\a' or character == '\b' or character == '\f' or character == '\n' or character == '\r':
             return self
         self._buffer[ vga.get_index(x, y) ] = vga.entry(
