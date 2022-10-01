@@ -44,7 +44,7 @@ void tty_setcolor(uint8_t color) {
 
 void tty_putcchar_at(char c, uint8_t color, size_t x, size_t y) 
 {
-	if(c == '\a' || c == '\b' || c == 'f' || c == '\n' || c == '\r') return;
+	if(c == '\a' || c == '\b' || c == '\f' || c == '\n' || c == '\r') return;
 	tty_buf[(vga_get_index(x, y))] = vga_entry(c, color);
 }
 
