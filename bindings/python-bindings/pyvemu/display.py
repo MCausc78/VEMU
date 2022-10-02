@@ -87,3 +87,4 @@ class VGADisplay:
     def print(self, string: str):
         for c in string:
             self.put_char(c)
+        return self
