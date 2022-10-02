@@ -4,6 +4,10 @@
 #include<stddef.h>
 #include<stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern const size_t VGA_WIDTH;
 extern const size_t VGA_HEIGHT;
 
@@ -61,5 +65,9 @@ uint8_t vga_entry_color(vga_color, vga_color);
 vga_entry_t vga_read_entry(uint16_t);
 
 size_t vga_get_index(size_t, size_t);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* VEMU_VGA_H */

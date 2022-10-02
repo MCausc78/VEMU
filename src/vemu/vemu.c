@@ -117,7 +117,7 @@ int main(int argc, char **argv) {
 	}
 	puts("+--------------------------------------------------------------------------------+");
 	// compile
-	#elif VEMU_MODE == 1
+#elif VEMU_MODE == 1
 	int bytes = (sizeof(char) * (strlen(VGA_FILE) + 4));
 	char *filename = malloc(bytes);
 	if(filename == NULL) {
@@ -126,22 +126,21 @@ int main(int argc, char **argv) {
 	}
 	strcpy(filename, (VGA_FILE));
 	strcat(filename, ".cs");
-	FILE *out;
-	out = fopen(filename, "a");
 	if(vemu_is_dir(filename) == 0) {
 		fprintf(stderr, "vemu: %s: Is a directory\n", filename);
-		fclose(out);
 		free(filename);
 		return 2;
 	}
+	FILE *out;
+	out = fopen(filename, "a");
 	if(out == NULL) {
 		fprintf(stderr, "vemu: ");
 		perror(filename);
 		free(filename);
 		return 1;
 	}
-	compile(fp, out);
+	compile_csharp(fp, out);
 	fclose(out);
-	#endif
+#endif
 	return 0;
 }

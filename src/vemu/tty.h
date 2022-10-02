@@ -4,6 +4,10 @@
 #include<stddef.h>
 #include<stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern size_t tty_row;
 extern size_t tty_col;
 extern uint8_t tty_color;
@@ -84,5 +88,9 @@ void tty_putchar(char);
  *
  */
 void tty_putcchar(char, uint8_t);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* VEMU_TTY_H */
