@@ -80,7 +80,7 @@ void dump_display(FILE *out) {
 	vga_entry_t entry;
 	for(size_t y=0; y < VGA_HEIGHT; y++) {
 		for(size_t x=0; x < VGA_WIDTH; x++) {
-			entry = vga_read_entry( term_buf[ vga_get_index(x, y) ] );
+			entry = vga_read_entry( tty_buf[ vga_get_index(x, y) ] );
 			fprintf("%c%c", entry.color, entry.ch);
 		}
 	}
